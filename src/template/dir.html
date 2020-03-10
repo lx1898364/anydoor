@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        .dir-list{
+            margin: 30px;
+        }
+        a{
+            margin-top: 30px;
+            display: block;
+            font-size: 20px;
+
+        }
+    </style>
+</head>
+<body>
+    <ul class="dir-list">
+        {{#each files}}
+           <li> <a href="{{../dir}}/{{this}}">{{this}}</a></li>
+        {{/each}}
+    </ul>
+</body>
+</html>
