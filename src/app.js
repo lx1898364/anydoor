@@ -6,14 +6,26 @@ const promisify = require('util').promisify;
 const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
 const conf = require('./config/defaultConfig');
-const route = require('./helper/router')
+const route = require('./helper/router');
+const openUrl = require('./helper/openUrl');
 
-const serve = http.createServer((req,res) => {
-    const filePath = path.join(conf.root, req.url);
-    route(req, res, filePath);
-})
+class Server {
+    constructor (config) {
+        this.conf = Object.assign({}, conf, config);
+    }
 
-serve.listen(conf.prot, conf.hostname, () => {
-    const addr = `http://${conf.hostname}:${conf.prot}`;
-    console.info(`Server started at ${chalk.green(addr)}`)
-})
+    start() {
+        const serve = http.createServer((req,res) => {
+            const filePath = path.join(this.conf.root, req.url);
+            route(req, res, filePath, this.conf);
+        })
+        
+        serve.listen(this.conf.port, this.conf.hostname, () => {
+            const addr = `http://${this.conf.hostname}:${this.conf.port}`;
+            console.info(`Server started at ${chalk.green(addr)}`)
+            openUrl(addr);
+        })
+    }
+}
+
+module.exports = Server;

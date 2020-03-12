@@ -1,8 +1,11 @@
 {
   "name": "anydoor",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Tiny NodeJS Static Web Server",
-  "main": "index.js",
+  "main": "src/app.js",
+  "bin": {
+    "anydoor": "bin/anydoor"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +21,8 @@
   "homepage": "https://github.com/lx1898364/anydoor#readme",
   "dependencies": {
     "chalk": "^3.0.0",
-    "handlebars": "^4.7.3"
+    "curl": "^0.1.4",
+    "handlebars": "^4.7.3",
+    "yargs": "^15.3.0"
   }
 }
